@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+	public static Spawner instance{ get; private set; }
 	public bool waveStart;
 	public int curWave = 0;
 
+	private void Awake()
+	{
+		instance = this;
+	}
 
 	public void WaveStart()
 	{

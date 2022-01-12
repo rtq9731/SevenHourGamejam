@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c850c5b2f7418d448400860d9b8b075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myKind: 1003
+  myKind: 1004
   myTrm: {fileID: 0}
   myVelocity: {x: 5, y: 0, z: 0}
   curHP: 100
