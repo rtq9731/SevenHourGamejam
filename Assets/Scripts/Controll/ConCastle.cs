@@ -8,6 +8,7 @@ public class ConCastle : CONCharacter
 
     public Sprite[] castleSprites = null;
 
+
     private new void Start()
     {
         hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());

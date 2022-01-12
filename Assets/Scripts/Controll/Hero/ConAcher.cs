@@ -6,7 +6,6 @@ public class ConAcher : CONCharacter
 {
     public override void Attack(float attackPower)
     {
-
         base.Attack(attackPower);
     }
 }
