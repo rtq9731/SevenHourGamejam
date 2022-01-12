@@ -17,6 +17,7 @@ public class AttackSword : CONEntity
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+        base.Awake();
     }
 
     public void SetAttack(Vector3 target, float speed, float damage)
@@ -41,8 +42,12 @@ public class AttackSword : CONEntity
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.transform.GetComponent<Monster>()?.Hit(_damage);
-        gameObject.SetActive(false);
+        Monster mon = collision.transform.GetComponent<Monster>();
+        if (mon != null && mon.gameObject.activeSelf && _anim.speed == 1)
+        {
+            mon.Hit(_damage);
+            gameObject.SetActive(false);
+        }
     }
 
     public IEnumerator MoveToTarget(Vector3 target)
@@ -51,7 +56,7 @@ public class AttackSword : CONEntity
 
         p1 = transform.position;
         p2 = target;
-        midPoint = new Vector2(target.x - transform.position.x, target.y + transform.position.y);
+        midPoint = new Vector2((target.x + transform.position.x) / 2, target.y + transform.position.y);
 
         while (Vector3.Distance(target, transform.position) >= 0.01f)
         {

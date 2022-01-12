@@ -20,6 +20,7 @@ public class UIRoot : MonoBehaviour
 
         Global.referenceResolution = new Vector2();
         Global.referenceResolution = rootCanvas.referenceResolution;
+        Global.referenceResolution = new Vector2(1920, 1080);
         Global.blackPannel = blackPannel;
 
         nowRatio = Convert.ToSingle((double)Screen.height / (double)Screen.width);

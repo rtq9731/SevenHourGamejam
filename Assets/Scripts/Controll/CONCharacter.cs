@@ -18,6 +18,10 @@ public class CONCharacter : CONEntity
     public virtual void Hit(float damage)
     {
         curHP -= damage;
+        if(curHP < 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public virtual void Attack(float attackPower)
@@ -34,6 +38,7 @@ public class CONCharacter : CONEntity
 
     public override void OnEnable()
     {
+        curHP = maxHP;
         base.OnEnable();
     }
 

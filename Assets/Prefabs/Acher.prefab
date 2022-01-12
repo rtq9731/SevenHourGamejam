@@ -123,6 +123,7 @@ MonoBehaviour:
   maxHP: 0
   attackCool: 10
   attackPower: 10
+  attackSword: {fileID: 4016793170998954462}
 --- !u!1 &4016793170998954461
 GameObject:
   m_ObjectHideFlags: 0

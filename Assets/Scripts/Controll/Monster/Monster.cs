@@ -13,9 +13,10 @@ public class Monster : CONCharacter
 	public override void Start()
 	{
 		//myAnim = this.GetComponent<Animator>();
-		playerTrm = GameObject.Find("player").transform;
+		playerTrm = FindObjectOfType<ConCastle>().transform;
 		curState = new Move(this,gameObject, myAnim, playerTrm);
 	}
+
 	public override void Update()
 	{
 		curState = this.curState.Process();

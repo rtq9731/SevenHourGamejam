@@ -18,7 +18,7 @@ public class ConAcher : CONCharacter
 
     public void Throw()
     {
-        Vector2 target = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf).transform.position;
-        (GameSceneClass.gMGPool.CreateObj(ePrefabs.AttackSword, attackSword.position) as AttackSword).SetAttack(target != null ? target : Vector2.zero, speed, damage);
+        CONEntity nearObj = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf);
+        (GameSceneClass.gMGPool.CreateObj(ePrefabs.AttackSword, attackSword.position) as AttackSword).SetAttack(nearObj != null ? nearObj.transform.position : Vector3.zero * Random.Range(-1f, 1f), speed, damage);
     }
 }
