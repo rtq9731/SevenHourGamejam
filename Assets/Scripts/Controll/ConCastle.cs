@@ -71,5 +71,6 @@ public class ConCastle : CONCharacter
     {
         curHP = maxHP;
         hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());
+        _sr.sprite = castleSprites[0];
     }
 }
