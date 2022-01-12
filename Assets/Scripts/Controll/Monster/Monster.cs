@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Monster : CONCharacter
 {
-	Animator myAnim;
 
 	public Transform playerTrm;
 
@@ -14,7 +13,7 @@ public class Monster : CONCharacter
 	{
 		//myAnim = this.GetComponent<Animator>();
 		playerTrm = FindObjectOfType<ConCastle>().transform;
-		curState = new Move(this,gameObject, myAnim, playerTrm);
+		curState = new Move(this,gameObject, _anim, playerTrm,attackRange);
 	}
 
 	public override void Update()

@@ -15,6 +15,8 @@ public class CONCharacter : CONEntity
     public float attackCool = 10f;
     public float attackPower = 10f;
 
+    public float attackRange;
+
     public virtual void Hit(float damage)
     {
         curHP -= damage;

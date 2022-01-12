@@ -22,20 +22,20 @@ public partial class State
 	protected GameObject myObj;
 	protected Animator myAnim;
 	protected Transform playerTrm;
+	protected float attackRange;
+	protected float speed;
 
 
 	protected State nextState;
 
-	float detectDist = 10.0f;
-	float detectAngle = 30.0f;
-	float shotDist = 7.0f;
 
-	public State(CONCharacter charactor,GameObject obj, Animator anim, Transform targetTrm)
+	public State(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm,float attackRange)
 	{
 		myChar = charactor;
 		myObj = obj;
 		myAnim = anim;
 		playerTrm = targetTrm;
+		this.attackRange = attackRange;
 
 		curEvent = eEvent.ENTER;
 	}
@@ -66,8 +66,8 @@ public partial class State
 	}
 	public bool CanAttackPlayer()
 	{
-		Vector3 dir = playerTrm.position - myObj.transform.position;
-		if (dir.magnitude < shotDist)
+		float dir = Mathf.Abs(playerTrm.position.x - myObj.transform.position.x);
+		if (dir < attackRange)
 		{
 			return true;
 		}
@@ -77,9 +77,9 @@ public partial class State
 }
 public class Idle : State
 {
-	public float attackDelay = 2f;
+	public float attackDelay = 1f;
 	public float time;
-	public Idle(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
+	public Idle(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm, float attackRange) : base(charactor, obj, anim, targetTrm,attackRange)
 	{
 		stateName = eState.IDLE;
 		time = attackDelay;
@@ -95,25 +95,25 @@ public class Idle : State
 		time -= Time.deltaTime;
 		if (CanAttackPlayer()&&time<0)
 		{
-			nextState = new Attack(myChar,myObj, myAnim, playerTrm);
+			nextState = new Attack(myChar,myObj, myAnim, playerTrm,attackRange);
 			curEvent = eEvent.EXIT;
 		}
 		if (!CanAttackPlayer())
 		{
-			nextState = new Move(myChar,myObj, myAnim, playerTrm);
+			nextState = new Move(myChar, myObj, myAnim, playerTrm, attackRange);
 			curEvent = eEvent.EXIT;
 		}
 	}
 	public override void Exit()
 	{
 		if (myAnim != null)
-			myAnim.ResetTrigger("isIdle");
+			myAnim.ResetTrigger("Idle");
 		base.Exit();
 	}
 }
 public class Move : State
 {
-	public Move(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
+	public Move(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm, float attackRange) : base(charactor, obj, anim, targetTrm, attackRange)
 	{
 		stateName = eState.MOVE;
 	}
@@ -125,13 +125,14 @@ public class Move : State
 	}
 	public override void Update()
 	{
+
 		if (!CanAttackPlayer())
 		{
-			myObj.transform.position += new Vector3(-1*myChar.myVelocity.x*Time.deltaTime, 0, 0);
+			myObj.transform.position += new Vector3(myChar.myVelocity.x*Time.deltaTime, 0, 0);
 		}
 		else
 		{
-			nextState = new Idle(myChar, myObj, myAnim, playerTrm);
+			nextState = new Idle(myChar, myObj, myAnim, playerTrm, attackRange);
 			curEvent = eEvent.EXIT;
 		}
 	}
@@ -144,32 +145,46 @@ public class Move : State
 }
 public class Attack : State
 {
-	public Attack(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
+	public float time;
+	public float delay = 1f;
+	public Attack(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm, float attackRange) : base(charactor, obj, anim, targetTrm, attackRange)
 	{
 		stateName = eState.ATTACK;
 	}
 	public override void Enter()
 	{
+		time = delay;
 		if (myAnim != null)
-			myAnim.SetTrigger("Attack");
-		Debug.Log("어택");
-		playerTrm.gameObject.GetComponent<CONCharacter>().Hit(myChar.attackPower);
-		base.Enter();
-		if (!CanAttackPlayer())
 		{
-			nextState = new Move(myChar, myObj, myAnim, playerTrm);
+			myAnim.SetTrigger("Attack");
+			Debug.Log("어택");
+		}
+
+		playerTrm.gameObject.GetComponent<CONCharacter>().Hit(myChar.attackPower);
+
+		base.Enter();
+	}
+	public override void Update()
+	{
+		time -= Time.deltaTime;
+		if (!CanAttackPlayer()&& time<0)
+		{
+			nextState = new Move(myChar, myObj, myAnim, playerTrm, attackRange);
 			curEvent = eEvent.EXIT;
 		}
-		else
+		else if(CanAttackPlayer ()&& time < 0)
 		{
-			nextState = new Idle(myChar, myObj, myAnim, playerTrm);
+			nextState = new Idle(myChar, myObj, myAnim, playerTrm, attackRange);
 			curEvent = eEvent.EXIT;
 		}
 	}
 	public override void Exit()
 	{
 		if (myAnim != null)
+		{
 			myAnim.ResetTrigger("Attack");
+		}
+
 		base.Exit();
 	}
 }

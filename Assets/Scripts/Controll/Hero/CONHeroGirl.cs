@@ -4,5 +4,19 @@ using UnityEngine;
 
 public class CONHeroGirl : CONHero
 {
-    // 히어로 개별 유닛이 가지는 특성 구현
+	public Transform playerTrm;
+
+	State curState;
+
+	public override void Start()
+	{
+		//myAnim = this.GetComponent<Animator>();
+		CONEntity nearObj = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf);
+		curState = new Move(this, gameObject, _anim, playerTrm, attackRange);
+	}
+
+	public override void Update()
+	{
+		curState = this.curState.Process();
+	}
 }

@@ -99,11 +99,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myKind: 1004
   myTrm: {fileID: 0}
-  myVelocity: {x: 5, y: 0, z: 0}
+  myVelocity: {x: -5, y: 0, z: 0}
   curHP: 100
   maxHP: 100
   attackCool: 10
   attackPower: 10
+  attackRange: 5.5
   playerTrm: {fileID: 0}
 --- !u!61 &-5399413674276734942
 BoxCollider2D:
