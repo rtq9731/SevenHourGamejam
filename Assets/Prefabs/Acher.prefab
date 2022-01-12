@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4016793170454855781}
   - component: {fileID: 4016793170454855780}
   - component: {fileID: 1746809176}
+  - component: {fileID: 4016793169784172862}
   m_Layer: 0
   m_Name: Acher
   m_TagString: Untagged
@@ -103,6 +104,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4016793169784172862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016793170454855787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c22bc1b626d66c4ab907bffd441d151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myKind: 0
+  myTrm: {fileID: 0}
+  myVelocity: {x: 0, y: 0, z: 0}
+  curHP: 100
+  maxHP: 100
+  attackCool: 10
+  attackPower: 10
 --- !u!1 &4016793170998954461
 GameObject:
   m_ObjectHideFlags: 0

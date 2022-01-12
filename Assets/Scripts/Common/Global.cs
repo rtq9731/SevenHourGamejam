@@ -20,6 +20,7 @@ public enum ePrefabs
     HEROS = 1000,
     HeroMan,
     HeroGirl,
+    Acher,
     Monster,
     MANAGERS = 2000,
     MGPool,
