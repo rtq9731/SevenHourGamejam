@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Monster : CONCharacter
 {
@@ -20,6 +21,7 @@ public class Monster : CONCharacter
     {
 		GameSceneClass.gMGPool.CreateObj(ePrefabs.HitEffect, transform.position);
         base.Hit(damage);
+
     }
 
     public override void Update()
