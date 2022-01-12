@@ -18,7 +18,7 @@ public class ConCastle : CONCharacter
     bool isDie = false;
 
     Action<float, float> attackAct = (float attackPower, float speed) => { };
-    Action _onDie = () => { };
+    public Action _onDie = () => { };
 
     private new void Start()
     {
@@ -65,6 +65,11 @@ public class ConCastle : CONCharacter
             isDie = true;
         }
 
+        hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());
+    }
+    public void Init()
+    {
+        curHP = maxHP;
         hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());
     }
 }

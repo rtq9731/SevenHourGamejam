@@ -167,6 +167,7 @@ namespace hero
 				Debug.Log("╬Нец");
 			}
 			CONEntity nearObj = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf);
+			if(nearObj!=null)
 			nearObj.gameObject.GetComponent<CONCharacter>().Hit(myChar.attackPower);
 
 			base.Enter();

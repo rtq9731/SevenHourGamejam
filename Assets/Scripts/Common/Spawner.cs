@@ -32,7 +32,8 @@ public class Spawner : MonoBehaviour
 		if(monsterList.FindAll(x => x.gameObject.activeSelf).Count <= 0 && waveStart)
         {
 			onWaveFinsh?.Invoke();
-			WaveStart();
+			Fade.Instance.SetFade(WaveStart);
+			waveStart = false;
 		}
     }
 
@@ -41,6 +42,15 @@ public class Spawner : MonoBehaviour
 		curWave++;
 		waveStart = false;
 		StartCoroutine(MonsterSpawn(curWave*5, transform.position));
+	}
+	public void Init()
+	{
+		curWave = 0;
+		waveBar.UpdateHealthBar(monsterList.Count, monsterList.FindAll(x => x.gameObject.activeSelf).Count, $"Wave {curWave}");
+		foreach (var item in monsterList)
+		{
+			item.gameObject.SetActive(false);
+		}
 	}
 	public IEnumerator MonsterSpawn(int monsterCount,Vector2 spawnPos)
 	{
