@@ -135,7 +135,7 @@ MonoBehaviour:
   maxHP: 100
   attackCool: 10
   attackPower: 10
-  attackRange: 10
+  attackRange: 20
   playerTrm: {fileID: 0}
 --- !u!212 &4517512649719419493
 SpriteRenderer:

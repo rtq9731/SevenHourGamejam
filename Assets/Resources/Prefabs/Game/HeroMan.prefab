@@ -104,7 +104,7 @@ MonoBehaviour:
   maxHP: 100
   attackCool: 10
   attackPower: 30
-  attackRange: 2
+  attackRange: 20
   playerTrm: {fileID: 0}
 --- !u!95 &2937216915515243924
 Animator:
