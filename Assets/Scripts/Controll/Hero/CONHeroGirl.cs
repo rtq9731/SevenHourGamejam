@@ -6,13 +6,13 @@ public class CONHeroGirl : CONHero
 {
 	public Transform playerTrm;
 
-	State curState;
+	hero.HeroState curState;
 
 	public override void Start()
 	{
 		//myAnim = this.GetComponent<Animator>();
 		CONEntity nearObj = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf);
-		curState = new Move(this, gameObject, _anim, playerTrm, attackRange);
+		curState = new hero.Move(this, gameObject, _anim, playerTrm, attackRange);
 	}
 
 	public override void Update()
