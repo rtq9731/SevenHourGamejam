@@ -8,6 +8,19 @@ public class CONCharacter : CONEntity
     // FSM, Detect 기능 등
     // 고유 캐릭터 스탯 데이터
     // 애니메이션 정보
+    protected float HP = 100f;
+    protected float MaxHP = 100f;
+    protected float attackCool = 10f;
+
+    public void Hit(float damage)
+    {
+        HP -= damage;
+    }
+
+    public void Attack()
+    {
+
+    }
 
     public override void Awake()
     {
