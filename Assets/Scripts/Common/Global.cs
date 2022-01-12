@@ -17,6 +17,7 @@ public enum ePrefabs
     None = -1,
     MainCamera,
     AttackSword,
+    HitEffect,
     HEROS = 1000,
     HeroMan,
     HeroGirl,

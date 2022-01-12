@@ -48,6 +48,7 @@ MonoBehaviour:
   poolHeroObjList:
   - {fileID: 3444377242906339848, guid: c57552d9c4de21642a3130fd7c5999d0, type: 3}
   - {fileID: 2052196941533017500, guid: a48e3c7ec6935274aaeda6267e25b14c, type: 3}
-  poolHeroCountList: 0000000000000000
-  poolHeroMaxCount: 2
+  - {fileID: 7617044800560174941, guid: d6178492dbefc7541b0354a3e1985c8a, type: 3}
+  poolHeroCountList: 000000000000000000000000
+  poolHeroMaxCount: 3
   myTrm: {fileID: 0}
