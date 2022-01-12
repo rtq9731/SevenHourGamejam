@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5587361501700053097, guid: 4d6707d8e041a574e8f78f7fe4fb46dd, type: 3}
       propertyPath: m_Name
-      value: HealthBar
+      value: CastleHPBar
       objectReference: {fileID: 0}
     - target: {fileID: 6530294150943309246, guid: 4d6707d8e041a574e8f78f7fe4fb46dd, type: 3}
       propertyPath: m_Color.b

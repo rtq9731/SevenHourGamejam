@@ -9,7 +9,7 @@ public class ConAcher : CONCharacter
     float speed;
     float damage;
 
-    public void SetAttack(float speed, float damage)
+    public void SetAttack(float damage, float speed)
     {
         this.speed = speed;
         this.damage = damage;
