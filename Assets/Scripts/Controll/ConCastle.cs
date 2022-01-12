@@ -7,10 +7,12 @@ public class ConCastle : CONCharacter
 {
     public HealthBar hpBar = null;
 
+    public float throwSpeed = 2f;
     public Sprite[] castleSprites = null;
     public ConAcher[] achers = null;
 
     private SpriteRenderer _sr = null;
+    
     float lastAttackTime = 0f;
 
     bool isDie = false;
@@ -20,15 +22,22 @@ public class ConCastle : CONCharacter
 
     private new void Start()
     {
+        hpBar = GameObject.Find("CastleHPBar").GetComponent<HealthBar>();
         hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());
         _sr = GetComponent<SpriteRenderer>();
+
+        foreach (var item in achers)
+        {
+            attackAct += item.SetAttack;
+        }
     }
 
     private void Update()
     {
-        if(lastAttackTime >= Time.time + attackCool)
+        if(Time.time >= lastAttackTime + attackCool)
         {
             lastAttackTime = Time.time;
+            attackAct(attackPower, throwSpeed);
         }
     }
 
