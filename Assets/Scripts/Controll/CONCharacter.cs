@@ -8,22 +8,27 @@ public class CONCharacter : CONEntity
     // FSM, Detect 기능 등
     // 고유 캐릭터 스탯 데이터
     // 애니메이션 정보
-    protected float HP = 100f;
-    protected float MaxHP = 100f;
-    protected float attackCool = 10f;
+    Animator _anim = null;
 
-    public void Hit(float damage)
+    [SerializeField] protected float curHP = 100f;
+    [SerializeField] protected float maxHP = 100f;
+    [SerializeField] protected float attackCool = 10f;
+    [SerializeField] protected float attackPower = 10f;
+
+    public virtual void Hit(float damage)
     {
-        HP -= damage;
+        curHP -= damage;
     }
 
-    public void Attack()
+    public virtual void Attack(float attackPower)
     {
-
+        _anim.SetTrigger("Attack");
     }
 
     public override void Awake()
     {
+        _anim = GetComponent<Animator>();
+        curHP = maxHP;
         base.Awake();
     }
 
