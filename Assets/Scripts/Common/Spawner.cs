@@ -5,7 +5,11 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 	public static Spawner instance{ get; private set; }
-	public bool waveStart;
+
+	private HealthBar waveBar;
+	List<CONEntity> monsterList = new List<CONEntity>();
+
+	public bool waveStart = true;
 	public int curWave = 0;
 
 	private void Awake()
@@ -13,18 +17,35 @@ public class Spawner : MonoBehaviour
 		instance = this;
 	}
 
-	public void WaveStart()
+    private void Start()
+    {
+		waveBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+		WaveStart();
+	}
+
+    private void Update()
+    {
+		waveBar.UpdateHealthBar(monsterList.Count, monsterList.FindAll(x => x.gameObject.activeSelf).Count, $"Wave {curWave}");
+		if(monsterList.FindAll(x => x.gameObject.activeSelf).Count <= 0 && waveStart)
+        {
+			WaveStart();
+		}
+    }
+
+    public void WaveStart()
 	{
 		curWave++;
-		waveStart = true;
+		waveStart = false;
 		StartCoroutine(MonsterSpawn(curWave*5, transform.position));
 	}
 	public IEnumerator MonsterSpawn(int monsterCount,Vector2 spawnPos)
 	{
 		yield return new WaitForSeconds(1f);
+		waveStart = true;
 		for (int i = 0; i < monsterCount; i++)
 		{
 			CONEntity monsterCon = GameSceneClass.gMGPool.CreateObj(ePrefabs.Monster, spawnPos+Random.insideUnitCircle);
+			monsterList.Add(monsterCon);
 			//Random
 			yield return new WaitForSeconds(0.1f);
 		}
