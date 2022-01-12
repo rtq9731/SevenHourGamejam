@@ -11,16 +11,25 @@ public class ConCastle : CONCharacter
     public ConAcher[] achers = null;
 
     private SpriteRenderer _sr = null;
+    float lastAttackTime = 0f;
 
     bool isDie = false;
 
-    Action<float> attackAct = (float attackPower) => { };
+    Action<float, float> attackAct = (float attackPower, float speed) => { };
     Action _onDie = () => { };
 
     private new void Start()
     {
         hpBar.UpdateHealthBar(maxHP, curHP, curHP.ToString());
         _sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        if(lastAttackTime >= Time.time + attackCool)
+        {
+            lastAttackTime = Time.time;
+        }
     }
 
     public override void Hit(float damage)

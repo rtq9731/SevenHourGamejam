@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class ConAcher : CONCharacter
 {
-    public override void Attack(float attackPower)
+    [SerializeField] Transform attackSword;
+
+    float speed;
+    float damage;
+
+    public void SetAttack(float speed, float damage)
     {
-        base.Attack(attackPower);
+        this.speed = speed;
+        this.damage = damage;
+        Attack(damage); // 원래 함수 실행
+    }
+
+    public void Throw()
+    {
+        Vector2 target = GameSceneClass.gMGPool.poolTotalDic[ePrefabs.Monster].Find(x => x.gameObject.activeSelf).transform.position;
+        (GameSceneClass.gMGPool.CreateObj(ePrefabs.AttackSword, attackSword.position) as AttackSword).SetAttack(target != null ? target : Vector2.zero, speed, damage);
     }
 }

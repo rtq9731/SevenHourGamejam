@@ -116,11 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c22bc1b626d66c4ab907bffd441d151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myKind: 0
-  myTrm: {fileID: 0}
+  myKind: 1003
+  myTrm: {fileID: 4016793170454855781}
   myVelocity: {x: 0, y: 0, z: 0}
-  curHP: 100
-  maxHP: 100
+  curHP: 0
+  maxHP: 0
   attackCool: 10
   attackPower: 10
 --- !u!1 &4016793170998954461

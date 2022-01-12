@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MGPool : MonoBehaviour
 {
     // ePrefabs을 키값으로 하는 CONEntity리스트 딕셔너리
-    private Dictionary<ePrefabs, List<CONEntity>> poolTotalDic;
+    public Dictionary<ePrefabs, List<CONEntity>> poolTotalDic;
 
     // 각 객체 타입별 리스트 및 최대갯수
     public List<GameObject> poolObjList;
