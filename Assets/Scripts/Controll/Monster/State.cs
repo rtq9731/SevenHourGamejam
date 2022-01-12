@@ -4,6 +4,7 @@ using UnityEngine;
 
 public partial class State
 {
+
 	public enum eState
 	{
 		IDLE,MOVE, ATTACK, DEAD
@@ -17,6 +18,7 @@ public partial class State
 	public eState stateName;
 	protected eEvent curEvent;
 
+	protected CONCharacter myChar;
 	protected GameObject myObj;
 	protected Animator myAnim;
 	protected Transform playerTrm;
@@ -28,8 +30,9 @@ public partial class State
 	float detectAngle = 30.0f;
 	float shotDist = 7.0f;
 
-	public State(GameObject obj, Animator anim, Transform targetTrm)
+	public State(CONCharacter charactor,GameObject obj, Animator anim, Transform targetTrm)
 	{
+		myChar = charactor;
 		myObj = obj;
 		myAnim = anim;
 		playerTrm = targetTrm;
@@ -76,14 +79,15 @@ public class Idle : State
 {
 	public float attackDelay = 2f;
 	public float time;
-	public Idle(GameObject obj, Animator anim, Transform targetTrm) : base(obj, anim, targetTrm)
+	public Idle(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
 	{
 		stateName = eState.IDLE;
 		time = attackDelay;
 	}
 	public override void Enter()
 	{
-		myAnim.SetTrigger("Idle");
+		if (myAnim != null)
+			myAnim.SetTrigger("Idle");
 		base.Enter();
 	}
 	public override void Update()
@@ -91,24 +95,31 @@ public class Idle : State
 		time -= Time.deltaTime;
 		if (CanAttackPlayer()&&time<0)
 		{
-			nextState = new Attack(myObj, myAnim, playerTrm);
+			nextState = new Attack(myChar,myObj, myAnim, playerTrm);
+			curEvent = eEvent.EXIT;
+		}
+		if (!CanAttackPlayer())
+		{
+			nextState = new Move(myChar,myObj, myAnim, playerTrm);
 			curEvent = eEvent.EXIT;
 		}
 	}
 	public override void Exit()
 	{
-		myAnim.ResetTrigger("isIdle");
+		if (myAnim != null)
+			myAnim.ResetTrigger("isIdle");
 		base.Exit();
 	}
 }
 public class Move : State
 {
-	public Move(GameObject obj, Animator anim, Transform targetTrm) : base(obj, anim, targetTrm)
+	public Move(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
 	{
-		stateName = eState.IDLE;
+		stateName = eState.MOVE;
 	}
 	public override void Enter()
 	{
+		if(myAnim!=null)
 		myAnim.SetTrigger("Move");
 		base.Enter();
 	}
@@ -116,31 +127,49 @@ public class Move : State
 	{
 		if (!CanAttackPlayer())
 		{
-			myObj.transform.position += new Vector3(-1, 0, 0);
+			myObj.transform.position += new Vector3(-1*myChar.myVelocity.x*Time.deltaTime, 0, 0);
+		}
+		else
+		{
+			nextState = new Idle(myChar, myObj, myAnim, playerTrm);
+			curEvent = eEvent.EXIT;
 		}
 	}
 	public override void Exit()
 	{
-		myAnim.ResetTrigger("Move");
+		if (myAnim != null)
+			myAnim.ResetTrigger("Move");
 		base.Exit();
 	}
 }
 public class Attack : State
 {
-	public Attack(GameObject obj, Animator anim, Transform targetTrm) : base(obj, anim, targetTrm)
+	public Attack(CONCharacter charactor, GameObject obj, Animator anim, Transform targetTrm) : base(charactor, obj, anim, targetTrm)
 	{
-		stateName = eState.IDLE;
+		stateName = eState.ATTACK;
 	}
 	public override void Enter()
 	{
-		myAnim.SetTrigger("Attack");
+		if (myAnim != null)
+			myAnim.SetTrigger("Attack");
+		Debug.Log("╬Нец");
+		playerTrm.gameObject.GetComponent<CONCharacter>().Hit(myChar.attackPower);
 		base.Enter();
-		nextState = new Idle(myObj, myAnim, playerTrm);
-		curEvent = eEvent.EXIT;
+		if (!CanAttackPlayer())
+		{
+			nextState = new Move(myChar, myObj, myAnim, playerTrm);
+			curEvent = eEvent.EXIT;
+		}
+		else
+		{
+			nextState = new Idle(myChar, myObj, myAnim, playerTrm);
+			curEvent = eEvent.EXIT;
+		}
 	}
 	public override void Exit()
 	{
-		myAnim.ResetTrigger("Attack");
+		if (myAnim != null)
+			myAnim.ResetTrigger("Attack");
 		base.Exit();
 	}
 }

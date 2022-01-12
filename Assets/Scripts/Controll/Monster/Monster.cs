@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Monster : CONCharacter
 {
+	Animator myAnim;
+
+	public Transform playerTrm;
+
+	State curState;
+
+	public override void Start()
+	{
+		//myAnim = this.GetComponent<Animator>();
+		playerTrm = GameObject.Find("player").transform;
+		curState = new Move(this,gameObject, myAnim, playerTrm);
+	}
 	public override void Update()
 	{
+		curState = this.curState.Process();
 	}
 }

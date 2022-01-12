@@ -10,10 +10,10 @@ public class CONCharacter : CONEntity
     // 애니메이션 정보
     Animator _anim = null;
 
-    [SerializeField] protected float curHP = 100f;
-    [SerializeField] protected float maxHP = 100f;
-    [SerializeField] protected float attackCool = 10f;
-    [SerializeField] protected float attackPower = 10f;
+    public float curHP = 100f;
+    public float maxHP = 100f;
+    public float attackCool = 10f;
+    public float attackPower = 10f;
 
     public virtual void Hit(float damage)
     {

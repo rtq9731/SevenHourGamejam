@@ -45,7 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolObjList: []
   poolObjCount: 
-  poolHeroObjList: []
-  poolHeroCountList: 
-  poolHeroMaxCount: 0
+  poolHeroObjList:
+  - {fileID: 3444377242906339848, guid: c57552d9c4de21642a3130fd7c5999d0, type: 3}
+  poolHeroCountList: 00000000
+  poolHeroMaxCount: 1
   myTrm: {fileID: 0}
