@@ -24,7 +24,6 @@ public class CONCharacter : CONEntity
         {
             gameObject.SetActive(false);
         }
-        GameSceneClass.gMGPool.CreateObj(ePrefabs.HitEffect, transform.position);
     }
 
     public virtual void Attack(float attackPower)
