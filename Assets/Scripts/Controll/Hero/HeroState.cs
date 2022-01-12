@@ -25,6 +25,7 @@ namespace hero
 		protected Transform playerTrm;
 		protected float attackRange;
 		protected float speed;
+		bool facingRight;
 
 
 		protected HeroState nextState;

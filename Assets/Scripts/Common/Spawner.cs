@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
 		waveBar.UpdateHealthBar(monsterList.Count, monsterList.FindAll(x => x.gameObject.activeSelf).Count, $"Wave {curWave}");
 		if(monsterList.FindAll(x => x.gameObject.activeSelf).Count <= 0 && waveStart)
         {
-			onWaveFinsh();
+			onWaveFinsh?.Invoke();
 			WaveStart();
 		}
     }
