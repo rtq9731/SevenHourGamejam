@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class Spawner : MonoBehaviour
 
 	private HealthBar waveBar;
 	List<CONEntity> monsterList = new List<CONEntity>();
+
+	public event Action onWaveFinsh;
 
 	public bool waveStart = true;
 	public int curWave = 0;
@@ -28,6 +31,7 @@ public class Spawner : MonoBehaviour
 		waveBar.UpdateHealthBar(monsterList.Count, monsterList.FindAll(x => x.gameObject.activeSelf).Count, $"Wave {curWave}");
 		if(monsterList.FindAll(x => x.gameObject.activeSelf).Count <= 0 && waveStart)
         {
+			onWaveFinsh();
 			WaveStart();
 		}
     }
@@ -44,7 +48,7 @@ public class Spawner : MonoBehaviour
 		waveStart = true;
 		for (int i = 0; i < monsterCount; i++)
 		{
-			CONEntity monsterCon = GameSceneClass.gMGPool.CreateObj(ePrefabs.Monster, spawnPos+Random.insideUnitCircle);
+			CONEntity monsterCon = GameSceneClass.gMGPool.CreateObj(ePrefabs.Monster, spawnPos+UnityEngine.Random.insideUnitCircle);
 			monsterList.Add(monsterCon);
 			//Random
 			yield return new WaitForSeconds(0.1f);

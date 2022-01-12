@@ -8,9 +8,9 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Button waveStartBtn = GameObject.Find("WaveStart").GetComponent<Button>();
-        print(waveStartBtn);
+        //Button waveStartBtn = GameObject.Find("WaveStart").GetComponent<Button>();
+        //print(waveStartBtn);
+        //waveStartBtn.onClick.AddListener(() => Spawner.instance.WaveStart());
         print(Spawner.instance);
-        waveStartBtn.onClick.AddListener(() => Spawner.instance.WaveStart());
     }
 }
