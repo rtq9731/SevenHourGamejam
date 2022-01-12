@@ -111,7 +111,11 @@ public class GameAwake : MonoBehaviour
             tempStr = getFileName(files[i].ToString());
 
             if (!Global.prefabsDic.TryGetValue((ePrefabs)Enum.Parse(typeof(ePrefabs), tempStr), out outObj))
+            {
+                print(((ePrefabs)Enum.Parse(typeof(ePrefabs), tempStr), (GameObject)files[i]));
                 Global.prefabsDic.Add((ePrefabs)Enum.Parse(typeof(ePrefabs), tempStr), (GameObject)files[i]);
+            }
+
         }
     }
 
