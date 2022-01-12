@@ -16,6 +16,7 @@ public enum ePrefabs
 {
     None = -1,
     MainCamera,
+    AttackSword,
     HEROS = 1000,
     HeroMan,
     HeroGirl,

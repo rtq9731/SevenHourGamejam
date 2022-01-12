@@ -31,7 +31,7 @@ public class AttackSword : CONEntity
         StartCoroutine(MoveToTarget(target));
     }
 
-    private void Update()
+    public override void Update()
     {
         _timer += Time.deltaTime;
         if(_timer >= disappearTime)
@@ -39,8 +39,7 @@ public class AttackSword : CONEntity
             gameObject.SetActive(false);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.transform.GetComponent<Monster>()?.Hit(_damage);
         gameObject.SetActive(false);
@@ -50,8 +49,8 @@ public class AttackSword : CONEntity
     {
         Vector3 p1, p2, midPoint;
 
-        p1 = Vector2.zero;
-        p2 = Vector2.zero;
+        p1 = transform.position;
+        p2 = target;
         midPoint = new Vector2(target.x - transform.position.x, target.y + transform.position.y);
 
         while (Vector3.Distance(target, transform.position) >= 0.01f)
