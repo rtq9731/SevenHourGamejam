@@ -8,7 +8,7 @@ public class CONCharacter : CONEntity
     // FSM, Detect 기능 등
     // 고유 캐릭터 스탯 데이터
     // 애니메이션 정보
-    Animator _anim = null;
+    protected Animator _anim = null;
 
     public float curHP = 100f;
     public float maxHP = 100f;
